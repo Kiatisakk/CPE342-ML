@@ -15,8 +15,10 @@ _Avoid_: "linear regression" as a synonym — linear regression is the model, OL
 how its coefficients are chosen.
 
 **Coefficient**:
-A learned number in the model equation. In simple regression there are exactly two:
-the **intercept** (beta_0) and the **slope** (beta_1).
+A learned number in the model equation. Which coefficients exist depends on the
+model: a regression line has exactly two, the **intercept** (beta_0) and the
+**slope** (beta_1), while a model of the form c_0 + c_1 e^(c_2 x) has three, and
+only the first two of those enter the equation linearly.
 _Avoid_: parameter, weight, constant (all correct elsewhere; pick one here).
 
 **Intercept (beta_0)**:
@@ -39,6 +41,54 @@ _Avoid_: "the OLS formula" — there are several equivalent ones.
 A solution computed directly by formula in one step. Contrasted with an **iterative**
 solution such as gradient descent, which approaches the answer over many steps.
 _Avoid_: analytical solution, exact solution.
+
+### Fitting iteratively
+
+**Loss function**:
+The single number a fitting procedure tries to make small, computed from the residuals
+of the whole training set. SSE and MSE are two choices of loss, not two different ideas.
+_Avoid_: cost function, objective function, error function (all correct elsewhere; pick
+one here).
+
+**MSE (Mean Squared Error)**:
+SSE divided by the number of observations. Dividing keeps the loss and its gradient the
+same size whatever the sample size, so a learning rate chosen once keeps working.
+_Avoid_: variance, average error.
+
+**Gradient**:
+The vector of partial derivatives of the *loss* with respect to every coefficient. It
+points the way the loss increases fastest, which is why descent moves against it.
+_Avoid_: derivative (singular — the gradient is the whole vector), slope (reserved for
+beta_1), the gradient of the fitted curve (a different object entirely).
+
+**Learning rate (eta)**:
+The factor scaling each step along the negative gradient. Too small and the run never
+arrives; too large and the loss climbs instead of falling.
+_Avoid_: step size — the step is eta times the gradient, so the two are not the same
+number.
+
+**Iteration**:
+One update of every coefficient, using a gradient computed from the whole training set.
+_Avoid_: epoch (one pass over the data — the same thing only in batch gradient descent),
+round, step.
+
+**Update rule**:
+The assignment applied once per iteration: new coefficients = old coefficients minus the
+learning rate times the gradient.
+_Avoid_: training step, learning step.
+
+**Convergence**:
+The state in which further iterations no longer move the coefficients meaningfully,
+evidenced by a gradient whose norm is near zero. A loss that stops changing is weaker
+evidence — that also happens when a run stalls or oscillates.
+_Avoid_: "it converged" as a synonym for "it fits well" — convergence says the search
+stopped moving and nothing about the quality of the fit.
+
+**Initialisation**:
+The coefficient values the first iteration starts from. Irrelevant when a closed form
+exists; for an iterative fit it can decide which minimum is reached, or whether one is
+reached at all.
+_Avoid_: seed (that is the random number generator's seed), starting guess.
 
 ### Judging a model
 
