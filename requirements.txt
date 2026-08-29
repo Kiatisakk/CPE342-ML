@@ -4,8 +4,11 @@
 #   .venv\Scripts\python.exe -m pip install -r requirements.txt
 #   .venv\Scripts\python.exe -m ipykernel install --user --name cpe342 --display-name "CPE342 (.venv)"
 numpy==2.5.2
-pandas==3.0.5
+pandas==2.3.3   # capped by lifelines (pandas<3.0)
 matplotlib==3.11.1
 scipy==1.18.0
 statsmodels==0.14.6
+lifelines==0.30.3
+seaborn==0.13.2
+xlrd==2.0.2      # reading the legacy .xls in lab03
 ipykernel==7.3.0
