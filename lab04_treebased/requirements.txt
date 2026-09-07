@@ -1,0 +1,11 @@
+# Dependencies for CPE342 Lab 04: Tree-Based Classification Experiment
+# Tested and verified on Python 3.12 / 3.14
+
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.5.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+jupyter>=1.0.0
+nbformat>=5.9.0
+nbconvert>=7.14.0
