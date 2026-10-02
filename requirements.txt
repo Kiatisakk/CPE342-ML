@@ -11,4 +11,7 @@ statsmodels==0.14.6
 lifelines==0.30.3
 seaborn==0.13.2
 xlrd==2.0.2      # reading the legacy .xls in lab03
+openpyxl==3.1.5  # reading the .xlsx in lab07
+scikit-learn==1.9.0  # PCA, StandardScaler, KMeans in lab07
+adjustText==1.4.0  # non-overlapping labels on the lab07 positioning map
 ipykernel==7.3.0
