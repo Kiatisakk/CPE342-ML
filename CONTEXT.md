@@ -126,10 +126,74 @@ The fitted line carries no evidence about that region, so such predictions must 
 be labelled as extrapolation.
 _Avoid_: out-of-range prediction, forecasting.
 
+### Reducing dimensions
+
+**Principal component (PC)**:
+A direction in feature space, stored as a unit eigenvector of the covariance matrix. PC1 is
+the direction of greatest variance; each later PC has the greatest variance among directions
+perpendicular to the earlier ones.
+_Avoid_: axis, factor.
+
+**Eigenvalue**:
+The variance of the data along one principal component. The eigenvalues of a covariance
+matrix sum to its trace, the total variance.
+_Avoid_: "variance explained" (that is the PVE, a proportion).
+
+**Loading**:
+The entry a feature has in a principal component's unit eigenvector. Its magnitude says how
+much the feature contributes to that PC; its sign is arbitrary.
+_Avoid_: weight (collides with a column like `wt` and with **Coefficient**), coefficient.
+
+**PC score**:
+The coordinate of one observation along a principal component. The reduced data is a table
+of scores.
+_Avoid_: transformed feature; projection (the act, not the value).
+
+**PVE (proportion of variance explained)**:
+An eigenvalue divided by the total variance: the share of total variance one PC carries.
+The cumulative PVE sums the first r. Unitless, and not **R-squared**, which compares a
+model's residuals with SST.
+_Avoid_: explained variance ratio (scikit-learn's name), R-squared.
+
+**Standardisation**:
+Rescaling each feature to mean zero and unit standard deviation before PCA, so that no
+feature dominates through its units alone.
+_Avoid_: normalisation (also means rescaling to [0, 1]), scaling.
+
+**Reconstruction**:
+Mapping r scores back to the original feature space. Exact when r equals the number of
+features; otherwise it loses the share of variance carried by the dropped eigenvalues.
+_Avoid_: inverse transform.
+
+### Grouping observations
+
+**Cluster**:
+A group of observations that an unsupervised method puts together. A clustering is
+evidence of structure only as far as the data's shape suits the method.
+_Avoid_: class (reserved for known labels).
+
+**Centroid**:
+The mean of the observations in one cluster; K-means assigns each observation to its
+nearest centroid.
+_Avoid_: center, prototype (a prototype is a real observation near the centroid).
+
+**Within-cluster SSE**:
+The sum of squared distances from each observation to its own cluster's centroid; the
+quantity K-means minimises. Not the regression **SSE**, which sums squared residuals.
+_Avoid_: inertia (scikit-learn's attribute name), bare "SSE" without context.
+
+**Elbow**:
+The K after which adding a cluster stops reducing the within-cluster SSE much.
+
+**Silhouette score**:
+The average, over observations, of how much closer each one is to its own cluster than
+to the nearest other cluster, from -1 to 1; higher is better. Unitless.
+
 ### Talking about units
 
 **Model-native units**:
 The units the data was recorded in, which are also the units the coefficients speak in.
 Every reported number is stated in model-native units first, with the plain real-world
 count in parentheses on first mention — e.g. "16.93 thousand units (about 16,933 units)".
-A bare number with no unit is never acceptable in a report.
+A bare number with no unit is never acceptable in a report. A dimensionless quantity (a
+proportion, a loading, a correlation) is labelled as such.
