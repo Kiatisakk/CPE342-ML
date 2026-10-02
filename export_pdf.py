@@ -21,6 +21,10 @@ EXTRA_CSS = """
     white-space: pre-wrap !important;
     word-break: break-word !important;
   }
+  /* A wide DataFrame (11 columns) is scrolled sideways on screen but cut off when printed. */
+  table.dataframe { font-size: 8px !important; }
+  table.dataframe th, table.dataframe td { padding: 1px 4px !important; }
+  div.jp-RenderedHTMLCommon, div.jp-OutputArea-output { overflow-x: visible !important; }
   @page { margin: 15mm; }
 </style>
 </head>"""
